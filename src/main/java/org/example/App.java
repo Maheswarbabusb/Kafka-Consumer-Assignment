@@ -23,13 +23,13 @@ public class App
         properties.put("key.deserializer",
                 "org.apache.kafka.common.serialization.StringDeserializer");
 
-        properties.put("value.deserializer",
+       properties.put("value.deserializer",
                 "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("group.id", "truck-group");
+        properties.put("group.id", "truck-partitioned-group");
 
         KafkaConsumer<String, String> consumer=new KafkaConsumer<>(properties);
 
-        consumer.subscribe(Collections.singletonList("truck-topic"));
+        consumer.subscribe(Collections.singletonList("Truck-Partitioned-Topic"));
 
         ConsumerRecords<String, String> poll = consumer.poll(Duration.ofSeconds(20));
 
@@ -37,6 +37,7 @@ public class App
 
             System.out.println(kaf.key());
             System.out.println(kaf.value());
+            System.out.println(kaf.partition());
 //                    getId());
 //            System.out.println(kaf.value().getLongitude());
 //            System.out.println(kaf.value().getLatitude());
